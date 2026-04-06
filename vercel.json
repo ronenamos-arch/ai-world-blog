@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd blog && pnpm install && pnpm run build",
+  "outputDirectory": "blog/dist",
+  "installCommand": "cd blog && pnpm install"
+}
