@@ -39,13 +39,14 @@ def write_post(
     tags: list[str] | None = None,
     author: str | None = None,
     draft: bool = True,
+    source_url: str | None = None,
 ) -> Path:
     """Write the post to blog/src/data/blog/ and return the file path."""
     cfg = get_config()
 
     title = _extract_title(post_markdown)
     description = _extract_description(post_markdown)
-    slug = make_slug(title)
+    slug = make_slug(title, source_url=source_url)
     body = _strip_h1(post_markdown)
 
     tz = ZoneInfo("Asia/Jerusalem")

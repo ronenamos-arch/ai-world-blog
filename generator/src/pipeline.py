@@ -1,6 +1,4 @@
 """Orchestrator: runs the full generation pipeline for one topic."""
-from pathlib import Path
-
 from .config import get_config
 from .firecrawl_client import scrape_url
 from .claude_client import generate_outline, generate_post, self_review
@@ -55,7 +53,7 @@ def run(
         return {"slug": "(dry-run)", "output_path": None, "score": score, "word_count": word_count, "issues": issues}
 
     print(f"[5/5] Writing Markdown file...")
-    output_path = write_post(post_markdown, tags=tags, draft=True)
+    output_path = write_post(post_markdown, tags=tags, draft=True, source_url=url)
     slug = output_path.stem
 
     mark_processed(url, slug)
