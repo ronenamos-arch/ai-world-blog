@@ -1,6 +1,6 @@
 """Write generated posts as Markdown files with YAML frontmatter."""
 import re
-from datetime import datetime, timezone
+from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -22,6 +22,8 @@ def _extract_description(post_markdown: str) -> str:
     for line in lines:
         line = line.strip()
         if line and not line.startswith('#') and not line.startswith('---'):
+            # Strip characters that break YAML frontmatter double-quoted strings
+            line = line.replace('"', '').replace("'", '').replace('\\', '')
             # Trim to ~160 chars for SEO
             return line[:160]
     return ""
