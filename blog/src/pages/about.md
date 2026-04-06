@@ -1,37 +1,24 @@
 ---
 layout: ../layouts/AboutLayout.astro
-title: "About"
+title: "אודות"
 ---
 
-AstroPaper is a minimal, accessible and SEO-friendly blog theme built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
+**עולם ה AI** הוא בלוג בעברית שמנסה לעשות סדר בכאוס של כלי ה-AI החדשים שיוצאים כל יום.
 
-![Astro Paper](public/astropaper-og.jpg)
+המטרה: להסביר בצורה נגישה, פרקטית וישירה — מה כל כלי עושה, למה כדאי להשתמש בו, ואיך מתחילים בפועל. בלי בלה-בלה שיווקי, בלי ז'רגון טכני מיותר.
 
-AstroPaper provides a solid foundation for blogs, or even portfolios\_ with full markdown support, built-in dark mode, and a clean layout that works out-of-the-box.
+## למי זה מיועד
 
-The blog posts in this theme also serve as guides, docs or example articles\_ making AstroPaper a flexible starting point for your next content-driven site.
+- סקרנים לגבי AI, בלי רקע טכני מוקדם
+- אנשי עבודה יצירתית — כותבים, מעצבים, יזמים
+- אנשי מקצוע שרוצים לייעל את היום-יום עם כלים חדשים
+- כל מי שחושב "שמעתי על X, אבל אין לי מושג מה זה"
 
-## Features
+## מה תמצאו כאן
 
-AstroPaper comes with a set of useful features that make content publishing easy and effective:
+- **מדריכים על כלים** — מה זה הכלי, למה צריך אותו, איך עובדים איתו
+- **מדריכים** — צעד-אחר-צעד לפתרון בעיה אמיתית
+- **השוואות** — X מול Y, מה עדיף ומתי
+- **תרחישי שימוש** — איך להשתמש ב-AI למטרה ספציפית
 
-- SEO-friendly
-- Fast performance
-- Light & dark mode
-- Highly customizable
-- Organizable blog posts
-- Responsive & accessible
-- Static search with [PageFind](https://pagefind.app/)
-- Automatic social image generation
-
-and so much more.
-
-## Show your support
-
-If you like [AstroPaper](https://github.com/satnaing/astro-paper), consider giving it a star ⭐️.
-
-Found a bug 🐛 or have an improvement ✨ in mind? Feel free to open an [issue](https://github.com/satnaing/astro-paper/issues), submit a [pull request](https://github.com/satnaing/astro-paper/pulls) or start a [discussion](https://github.com/satnaing/astro-paper/discussions).
-
-If you find this theme helpful, you can also [sponsor me on GitHub](https://github.com/sponsors/satnaing) or [buy me a coffee](https://buymeacoffee.com/satnaing) to show your support — every penny counts.
-
-Kyay zuu! 🙏🏼
+הכל בעברית, הכל פרקטי.

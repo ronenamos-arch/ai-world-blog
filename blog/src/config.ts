@@ -13,7 +13,7 @@ export const SITE = {
   showBackButton: true, // show back button in post detail
   editPost: {
     enabled: false,
-    text: "Edit page",
+    text: "ערוך דף",
     url: "",
   },
   dynamicOgImage: true,
