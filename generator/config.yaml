@@ -1,0 +1,17 @@
+blog:
+  output_dir: ../blog/src/data/blog
+  author: עולם ה AI
+  default_tags:
+    - AI
+
+claude:
+  model: claude-opus-4-6
+  max_tokens: 4096
+
+post:
+  min_words: 800
+  max_words: 1500
+  language: he
+
+review:
+  min_score: 7
