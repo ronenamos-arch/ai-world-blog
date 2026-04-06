@@ -1,14 +1,7 @@
 topics:
-  # Add HowDoIUseAI URLs here to generate posts from them.
-  # Each entry needs: url, type, priority, tags
-  #
-  # type options: tool_explainer | tutorial | comparison | use_case
-  # priority: lower number = higher priority (1 = first)
-  #
-  # Example:
-  # - url: https://howdoiuseai.com/some-post
-  #   type: tool_explainer
-  #   priority: 1
-  #   tags:
-  #     - claude
-  #     - ai-tools
+  - url: https://knowlab.in/stop-wasting-time-on-bad-ai-tools-the-16-best-ai-tools-that-actually-work-in-2026/
+    type: tool_explainer
+    priority: 1
+    tags:
+      - AI
+      - כלים

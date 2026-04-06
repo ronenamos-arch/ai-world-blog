@@ -30,15 +30,14 @@ def scrape_url(url: str, force: bool = False) -> dict:
         raise RuntimeError("FIRECRAWL_API_KEY environment variable not set")
 
     app = FirecrawlApp(api_key=api_key)
-    result = app.scrape_url(
+    result = app.scrape(
         url,
         formats=["markdown"],
-        only_main_content=True,
     )
 
-    title = result.get("metadata", {}).get("title", "")
-    content_markdown = result.get("markdown", "")
-    metadata = result.get("metadata", {})
+    title = (result.metadata.title if result.metadata else "") or ""
+    content_markdown = result.markdown or ""
+    metadata = result.metadata.model_dump() if result.metadata else {}
 
     data = {
         "url": url,
