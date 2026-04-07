@@ -40,6 +40,7 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
         run: |
           python -m src.cli --next --type ${{ github.event.inputs.post_type || 'tool_explainer' }}
 
@@ -47,7 +48,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add blog/src/data/blog/ generator/state/processed.json
+          git add blog/src/data/blog/ blog/public/images/ generator/state/processed.json
           if git diff --staged --quiet; then
             echo "No new post generated (queue empty or all processed)."
           else

@@ -40,6 +40,7 @@ def write_post(
     author: str | None = None,
     draft: bool = True,
     source_url: str | None = None,
+    og_image: str | None = None,
 ) -> Path:
     """Write the post to blog/src/data/blog/ and return the file path."""
     cfg = get_config()
@@ -53,7 +54,6 @@ def write_post(
     now = datetime.now(tz)
     date_str = now.strftime("%Y-%m-%d")
     pub_datetime = now.strftime("%Y-%m-%dT%H:%M:%S%z")
-    # Insert colon in timezone offset: +0300 -> +03:00
     pub_datetime = pub_datetime[:-2] + ":" + pub_datetime[-2:]
 
     final_tags = tags or cfg["blog"].get("default_tags", ["AI"])
@@ -64,6 +64,8 @@ def write_post(
     output_dir.mkdir(parents=True, exist_ok=True)
     output_path = output_dir / filename
 
+    og_line = f"\nogImage: {og_image}" if og_image else ""
+
     frontmatter = f"""---
 title: "{title}"
 description: "{description}"
@@ -72,7 +74,7 @@ author: {final_author}
 tags:
 {chr(10).join(f'  - {tag}' for tag in final_tags)}
 featured: false
-draft: {'true' if draft else 'false'}
+draft: {'true' if draft else 'false'}{og_line}
 ---
 
 """
