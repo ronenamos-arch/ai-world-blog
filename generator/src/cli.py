@@ -44,6 +44,7 @@ def main():
 
     args = parser.parse_args()
 
+    topic = None
     if args.next:
         from .queue_manager import get_next
         topic = get_next(skip_dedup=args.no_dedup)
@@ -71,6 +72,11 @@ def main():
     if not args.dry_run:
         print(f"\nDone! Post saved as draft: {result['output_path']}")
         print("Edit draft: false in the frontmatter to publish.")
+        
+        if topic and topic.notion_page_id:
+            from .notion_client import NotionClient
+            NotionClient().update_status(topic.notion_page_id, "Published")
+            print(f"Updated Notion entry: {topic.notion_page_id} status set to Published")
 
 
 if __name__ == "__main__":

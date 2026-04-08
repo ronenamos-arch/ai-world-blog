@@ -5,19 +5,19 @@
 
 :root,
 html[data-theme="light"] {
-  --background: #fdfdfd;
-  --foreground: #282728;
-  --accent: #006cac;
-  --muted: #e6e6e6;
-  --border: #ece9e9;
+  --background: #fafafa;
+  --foreground: #1e1b2e;
+  --accent: #4f46e5;
+  --muted: #e8e7f5;
+  --border: #dddaf5;
 }
 
 html[data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
-  --muted: #343f60;
-  --border: #ab4b08;
+  --background: #0f0f1a;
+  --foreground: #e8e6f5;
+  --accent: #818cf8;
+  --muted: #1e1b35;
+  --border: #2d2a52;
 }
 
 @theme inline {
@@ -58,6 +58,18 @@ html[data-theme="dark"] {
 
 @utility app-layout {
   @apply mx-auto w-full max-w-app px-4;
+}
+
+@utility glassmorphism {
+  @apply bg-background/60 backdrop-blur-md border border-white/10 dark:border-white/5;
+}
+
+@utility premium-shadow {
+  @apply shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)];
+}
+
+@utility premium-shadow-hover {
+  @apply hover:shadow-[0_20px_50px_rgba(79,70,229,0.15)] dark:hover:shadow-[0_20px_50px_rgba(129,140,248,0.2)];
 }
 
 .active-nav {

@@ -113,4 +113,4 @@ Cron אוטומטי: כל יום ראשון 10:00 שעון ישראל
 | GitHub Actions (manual + cron) | ✅ |
 | תמונות לפוסטים | ❌ |
 | Affiliate links | ❌ |
-| CTA | ❌ |
+| CTA קבוצת טלגרם | ❌ |

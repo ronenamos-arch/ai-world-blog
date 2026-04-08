@@ -14,10 +14,20 @@ class Topic:
     type: str
     priority: int = 1
     tags: list[str] = field(default_factory=list)
+    notion_page_id: str | None = None
 
 
 def get_next(skip_dedup: bool = False) -> Topic | None:
-    """Return the highest-priority unprocessed topic, or None if queue is empty."""
+    """Return the highest-priority unprocessed topic from Notion or local queue."""
+    # Try Notion first
+    from .notion_client import NotionClient
+    notion = NotionClient()
+    if notion.client:
+        topic = notion.fetch_next_article()
+        if topic:
+            return topic
+
+    # Fallback to local queue.yaml
     if not _QUEUE_PATH.exists():
         return None
 

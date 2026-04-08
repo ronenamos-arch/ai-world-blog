@@ -85,28 +85,68 @@ const nextPost =
 <Layout {...layoutProps}>
   <Header />
   <BackButton />
+  {ogImage && (
+    <div class="relative mt-8 h-[300px] w-full overflow-hidden sm:h-[450px]">
+      <img
+        src={ogImage}
+        alt={title}
+        class="h-full w-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+      <div class="app-layout absolute inset-0 flex flex-col justify-end pb-8">
+        <div class="glassmorphism inline-block self-start p-6 rounded-2xl premium-shadow">
+          <h1
+            transition:name={slugifyStr(title.replaceAll(".", "-"))}
+            class="text-3xl font-bold text-accent sm:text-4xl lg:text-5xl"
+          >
+            {title}
+          </h1>
+          <div class="mt-4 flex items-center gap-4 text-sm font-medium">
+            <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
+            <span class="opacity-50">|</span>
+            <div class="flex items-center gap-2">
+               <span class="opacity-70 dark:opacity-50">מאת:</span>
+               <span class="text-accent">{author}</span>
+            </div>
+            {SITE.editPost.enabled && !hideEditPost && (
+              <>
+                <span class="opacity-50 max-sm:hidden">|</span>
+                <EditPost {hideEditPost} {post} class="max-sm:hidden" />
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+
   <main
     id="main-content"
-    class:list={["app-layout pb-12", { "mt-8": !SITE.showBackButton }]}
+    class:list={["app-layout pb-12", { "mt-12": !ogImage }]}
     data-pagefind-body
   >
-    <h1
-      transition:name={slugifyStr(title.replaceAll(".", "-"))}
-      class="inline-block text-2xl font-bold text-accent sm:text-3xl"
-    >
-      {title}
-    </h1>
-    <div class="my-2 flex items-center gap-2">
-      <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
-      <span
-        aria-hidden="true"
-        class:list={[
-          "max-sm:hidden",
-          { hidden: !SITE.editPost.enabled || hideEditPost },
-        ]}>|</span
-      >
-      <EditPost {hideEditPost} {post} class="max-sm:hidden" />
-    </div>
+    {!ogImage && (
+      <>
+        <h1
+          transition:name={slugifyStr(title.replaceAll(".", "-"))}
+          class="inline-block text-2xl font-bold text-accent sm:text-3xl"
+        >
+          {title}
+        </h1>
+        <div class="my-2 flex items-center gap-2">
+          <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
+          <span
+            aria-hidden="true"
+            class:list={[
+              "max-sm:hidden",
+              { hidden: !SITE.editPost.enabled || hideEditPost },
+            ]}>|</span
+          >
+          <EditPost {hideEditPost} {post} class="max-sm:hidden" />
+        </div>
+      </>
+    )}
     <article
       id="article"
       class="app-prose mt-8 w-full max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"

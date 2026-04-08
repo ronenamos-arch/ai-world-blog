@@ -3,7 +3,6 @@ from .config import get_config
 from .firecrawl_client import scrape_url
 from .claude_client import generate_outline, generate_post, self_review
 from .markdown_writer import write_post
-from .image_search import fetch_image
 from .dedup import mark_processed
 
 
@@ -53,15 +52,11 @@ def run(
         print("[5/5] DRY RUN — not writing file.")
         return {"slug": "(dry-run)", "output_path": None, "score": score, "word_count": word_count, "issues": issues}
 
-    # Step 5a: fetch image from Unsplash
-    from .markdown_writer import _extract_title
-    title = _extract_title(post_markdown)
-    from .slug import make_slug
-    slug_preview = make_slug(title, source_url=url)
-    print(f"[5/6] Fetching image...")
-    og_image = fetch_image(tags=tags or [], title=title, slug=slug_preview)
+    # Image: add manually — drop a JPG to blog/public/images/posts/<slug>.jpg
+    # then set ogImage: /images/posts/<slug>.jpg in the post frontmatter.
+    og_image = None
 
-    print(f"[6/6] Writing Markdown file...")
+    print(f"[5/5] Writing Markdown file...")
     output_path = write_post(post_markdown, tags=tags, draft=True, source_url=url, og_image=og_image)
     slug = output_path.stem
 

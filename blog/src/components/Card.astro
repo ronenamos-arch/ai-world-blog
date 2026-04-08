@@ -10,24 +10,43 @@ type Props = {
 
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
-const { title, description, ...props } = data;
+const { title, description, ogImage, ...props } = data;
+
+const postUrl = getPath(id, filePath);
+const imageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src ?? null;
 ---
 
-<li class="my-6">
+<li class="my-8">
   <a
-    href={getPath(id, filePath)}
-    class:list={[
-      "inline-block text-lg font-medium text-accent",
-      "decoration-dashed underline-offset-4 hover:underline",
-      "focus-visible:no-underline focus-visible:underline-offset-0",
-    ]}
+    href={postUrl}
+    class="group block overflow-hidden rounded-2xl border border-border transition-all duration-300 premium-shadow premium-shadow-hover"
   >
-    <Heading
-      style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
-    >
-      {title}
-    </Heading>
+    <!-- תמונה -->
+    <div class="aspect-video w-full overflow-hidden bg-muted">
+      {imageUrl ? (
+        <img
+          src={imageUrl}
+          alt={title}
+          class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          loading="lazy"
+        />
+      ) : (
+        <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-accent/20 to-accent/5">
+          <span class="text-4xl opacity-30">🤖</span>
+        </div>
+      )}
+    </div>
+
+    <!-- תוכן -->
+    <div class="p-5">
+      <Heading
+        class="text-lg font-semibold text-accent group-hover:underline decoration-dashed underline-offset-4"
+        style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
+      >
+        {title}
+      </Heading>
+      <Datetime class="mt-1" {...props} />
+      <p class="mt-2 text-sm text-foreground/75 line-clamp-2">{description}</p>
+    </div>
   </a>
-  <Datetime {...props} />
-  <p>{description}</p>
 </li>
