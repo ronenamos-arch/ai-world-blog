@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd blog && pnpm install && pnpm run build",
+  "buildCommand": "cd blog && npm install && npm run build",
   "outputDirectory": "blog/dist",
-  "installCommand": "cd blog && pnpm install"
+  "installCommand": "cd blog && npm install"
 }
