@@ -2,6 +2,9 @@
 
 בלוג עברית אוטומטי שמלמד על כלי AI חדשים — בהשראת [howdoiuseai.com](https://howdoiuseai.com), עם תוכן מקורי בעברית.
 
+> **AI Agents & Developers:** Read [`CLAUDE.md`](CLAUDE.md) before making any changes. It contains critical rules that prevent deployment failures.
+> See also: [`docs/deployment-lessons.md`](docs/deployment-lessons.md) — a log of real failures and how they were fixed.
+
 ## מבנה הפרויקט
 
 ```
