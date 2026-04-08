@@ -1,5 +1,5 @@
 export const SITE = {
-  website: "https://olam-ha-ai.vercel.app/", // replace after Vercel deploy
+  website: "https://ai-world-blog.vercel.app/", // current production domain
   author: "עולם ה AI",
   profile: "",
   desc: "בלוג על כלי AI חדשים והסברים נגישים בעברית",
