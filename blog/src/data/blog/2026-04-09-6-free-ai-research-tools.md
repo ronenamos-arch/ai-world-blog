@@ -10,7 +10,7 @@ tags:
   - פרודוקטיביות
 featured: false
 draft: false
-ogImage: /images/posts/ai-automation-tools.jpg
+ogImage: /images/posts/notebook.jpg
 ---
 
 המחקר השתנה. לא מדובר עוד בלפתוח עשרים לשוניות, להוריד PDF-ים אינסופיים, ולקוות שמשהו שימושי יעלה. בשנת 2026, יש דרך חכמה יותר — כלי AI שעוזרים לחפש טוב יותר, להבין מאמרים מהר יותר, לקשר רעיונות ולארגן ידע.
