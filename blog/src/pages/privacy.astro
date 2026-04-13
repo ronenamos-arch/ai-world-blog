@@ -1,0 +1,49 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Main from "@/layouts/Main.astro";
+import { SITE } from "@/config";
+---
+
+<Layout title={`מדיניות פרטיות | ${SITE.title}`}>
+  <Header />
+  <Main pageTitle="מדיניות פרטיות" pageDesc="מידע על איסוף ושימוש בנתונים באתר.">
+    <div class="prose prose-invert max-w-none mt-8 text-foreground/90 leading-relaxed">
+      <p>
+        ברוכים הבאים לבלוג של {SITE.title}. אנו מכבדים את פרטיותכם ומחויבים להגן עליה בהתאם לחוק הגנת הפרטיות, התשמ"א-1981 (כולל תיקון 13).
+      </p>
+
+      <h2 class="text-xl font-bold mt-6 mb-4 text-accent">1. איסוף מידע</h2>
+      <p>
+        אנו עשויים לאסוף מידע הנמסר על ידכם באופן יזום (למשל, ברישום לניוזלטר או בתגובות) וכן מידע טכני הנאסף באופן אוטומטי (כגון כתובת IP, סוג דפדפן וזמני שהייה באתר) לצורך שיפור חווית המשתמש.
+      </p>
+
+      <h2 class="text-xl font-bold mt-6 mb-4 text-accent">2. שימוש במידע</h2>
+      <p>
+        המידע נאסף למטרות הבאות:
+        <ul class="list-disc list-inside mr-4">
+          <li>תפעול ושיפור האתר והתכנים בו.</li>
+          <li>ניהול קבוצת הטלגרם והרשימות השיווקיות שלנו (אם הצטרפתם).</li>
+          <li>ניתוח סטטיסטי אנונימי.</li>
+        </ul>
+      </p>
+
+      <h2 class="text-xl font-bold mt-6 mb-4 text-accent">3. אבטחת מידע</h2>
+      <p>
+        אנו נוקטים באמצעי אבטחה סבירים כדי להגן על המידע שלכם מפני גישה בלתי מורשית או שימוש לרעה, בהתאם לדרישות הדין בישראל.
+      </p>
+
+      <h2 class="text-xl font-bold mt-6 mb-4 text-accent">4. זכויותיכם</h2>
+      <p>
+        על פי חוק הגנת הפרטיות, לכל אדם הזכות לעיין במידע המוחזק עליו במאגר מידע, ולבקש לתקן או למחוק מידע אם הוא אינו נכון, שלם, ברור או מעודכן.
+      </p>
+
+      <h2 class="text-xl font-bold mt-6 mb-4 text-accent">5. יצירת קשר</h2>
+      <p>
+        לכל שאלה בנושא פרטיות, ניתן לפנות אלינו דרך הקישורים המופיעים בתחתית האתר.
+      </p>
+    </div>
+  </Main>
+  <Footer />
+</Layout>

@@ -41,6 +41,12 @@ export const SOCIALS: Social[] = [
     linkTitle: `Send an email to ${SITE.title}`,
     icon: IconMail,
   },
+  {
+    name: "Telegram",
+    href: "https://t.me/AI_World_IL",
+    linkTitle: `${SITE.title} on Telegram`,
+    icon: IconTelegram,
+  },
 ] as const;
 
 export const SHARE_LINKS: Social[] = [

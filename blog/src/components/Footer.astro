@@ -27,6 +27,12 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
       <span>© {currentYear}</span>
       <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
       <span>כל הזכויות שמורות.</span>
+      <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
+      <div class="flex gap-3">
+        <a href="/privacy" class="hover:text-accent transition-colors underline decoration-dashed underline-offset-4">מדיניות פרטיות</a>
+        <span class="text-border">/</span>
+        <a href="/terms" class="hover:text-accent transition-colors underline decoration-dashed underline-offset-4">תקנון</a>
+      </div>
     </div>
   </div>
 </footer>

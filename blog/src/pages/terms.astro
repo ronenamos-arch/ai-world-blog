@@ -1,0 +1,44 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Main from "@/layouts/Main.astro";
+import { SITE } from "@/config";
+---
+
+<Layout title={`תקנון ותנאי שימוש | ${SITE.title}`}>
+  <Header />
+  <Main pageTitle="תקנון ותנאי שימוש" pageDesc="הנחיות לשימוש בתכני האתר.">
+    <div class="prose prose-invert max-w-none mt-8 text-foreground/90 leading-relaxed">
+      <p>
+        השימוש בבלוג {SITE.title} כפוף לתנאים המפורטים להלן. עצם השימוש באתר מהווה הסכמה לתנאים אלו.
+      </p>
+
+      <h2 class="text-xl font-bold mt-6 mb-4 text-accent">1. קניין רוחני</h2>
+      <p>
+        כל התכנים המופיעים באתר, לרבות מאמרים, קוד, עיצובים ותמונות, שייכים ל-{SITE.title} אלא אם צוין אחרת. אין להעתיק, להפיץ או להשתמש בתכנים ללא אישור מראש ובכתב.
+      </p>
+
+      <h2 class="text-xl font-bold mt-6 mb-4 text-accent">2. אחריות</h2>
+      <p>
+        התכנים בבלוג מוגשים כמידע כללי בלבד ואינם מהווים ייעוץ מקצועי או טכני מחייב. השימוש במידע ובכלים המוצגים הוא על אחריות המשתמש בלבד.
+      </p>
+
+      <h2 class="text-xl font-bold mt-6 mb-4 text-accent">3. שימוש הוגן</h2>
+      <p>
+        ניתן לשתף קישורים לפוסטים באתר ברשתות החברתיות, בתנאי שניתן קרדיט מלא ושלא נעשה שימוש מסחרי בתכנים ללא אישור.
+      </p>
+
+      <h2 class="text-xl font-bold mt-6 mb-4 text-accent">4. שינויים בתנאים</h2>
+      <p>
+        אנו שומרים לעצמנו את הזכות לעדכן את תנאי השימוש מעת לעת. העדכונים יפורסמו בדף זה.
+      </p>
+
+      <h2 class="text-xl font-bold mt-6 mb-4 text-accent">5. סמכות שיפוט</h2>
+      <p>
+        על תנאי שימוש אלו יחולו חוקי מדינת ישראל בלבד.
+      </p>
+    </div>
+  </Main>
+  <Footer />
+</Layout>
