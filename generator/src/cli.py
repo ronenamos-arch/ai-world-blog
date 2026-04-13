@@ -75,8 +75,8 @@ def main():
         
         if topic and topic.notion_page_id:
             from .notion_client import NotionClient
-            NotionClient().update_status(topic.notion_page_id, "Published")
-            print(f"Updated Notion entry: {topic.notion_page_id} status set to Published")
+            NotionClient().update_status(topic.notion_page_id, "Done")
+            print(f"Updated Notion entry: {topic.notion_page_id} status set to Done")
 
 
 if __name__ == "__main__":

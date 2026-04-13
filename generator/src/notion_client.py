@@ -21,23 +21,24 @@ class NotionClient:
             return None
 
         try:
-            response = self.client.databases.query(
-                database_id=self.db_id,
+            # Ensure ID has dashes if it's missing them
+            db_id = self.db_id
+            if "-" not in db_id:
+                db_id = f"{db_id[:8]}-{db_id[8:12]}-{db_id[12:16]}-{db_id[16:20]}-{db_id[20:]}"
+                
+            # Use data_sources.query for version 3.0.0 compat
+            # We filter for "Not started" as the initial status
+            response = self.client.data_sources.query(
+                data_source_id=db_id,
                 filter={
                     "property": "Status",
                     "status": {
-                        "equals": "Pending"
+                        "equals": "Not started"
                     }
                 },
-                sorts=[
-                    {
-                        "property": "Priority",
-                        "direction": "ascending"
-                    }
-                ],
                 page_size=1
             )
-
+            
             results = response.get("results")
             if not results:
                 return None
@@ -45,42 +46,32 @@ class NotionClient:
             page = results[0]
             props = page.get("properties", {})
 
-            # Extract URL
-            url_prop = props.get("URL", {})
+            # Extract URL from "URL מקור"
+            url_prop = props.get("URL מקור", {})
             url = url_prop.get("url")
             if not url:
-                # Try title if URL is missing? No, URL is mandatory for our generator
                 return None
 
-            # Extract Type
-            type_prop = props.get("Type", {})
-            post_type = "tool_explainer"
-            if type_prop.get("type") == "select":
-                post_type = type_prop.get("select", {}).get("name") or "tool_explainer"
-
-            # Extract Tags
-            tags_prop = props.get("Tags", {})
+            # Extract Tags from "קטגוריה"
+            tags_prop = props.get("קטגוריה", {})
             tags = []
             if tags_prop.get("type") == "multi_select":
                 tags = [t["name"] for t in tags_prop.get("multi_select", [])]
 
-            # Extract Priority
-            priority_prop = props.get("Priority", {})
-            priority = 1
-            if priority_prop.get("type") == "number":
-                priority = priority_prop.get("number") or 1
-
             topic = Topic(
                 url=url,
-                type=post_type,
-                priority=priority,
+                type="tool_explainer",
+                priority=1,
                 tags=tags,
                 notion_page_id=page["id"]
             )
             return topic
 
         except Exception as e:
+            import traceback
             logger.error(f"Error fetching from Notion: {e}")
+            logger.debug(traceback.format_exc())
+            print(f"DEBUG Traceback: {traceback.format_exc()}")
             return None
 
     def update_status(self, page_id: str, status: str):
