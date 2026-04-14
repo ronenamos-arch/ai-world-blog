@@ -9,7 +9,7 @@ tags:
   - כלים
   - מדריכים
 featured: false
-draft: true
+draft: false
 ogImage: /images/posts/github-beginners.jpg
 ---
 

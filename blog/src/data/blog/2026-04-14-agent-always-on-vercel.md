@@ -9,7 +9,7 @@ tags:
   - Vercel
   - Automation
 featured: false
-draft: true
+draft: false
 ogImage: /images/posts/agent-always-on-vercel.jpg
 ---
 
