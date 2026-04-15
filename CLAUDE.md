@@ -106,6 +106,8 @@ Serves blog/dist/ as static site
 2. Save the post image to `blog/public/images/posts/slug.jpg`
 3. Push — Vercel auto-deploys
 
+**Note:** Every post automatically includes an "About the Author" section (רונן עמוס - יועץ CFO חיצוני ומומחה AI לפיננסים) before the Telegram CTA. This is part of `blog/src/layouts/PostDetails.astro` and applies to all posts — no per-post configuration needed.
+
 ---
 
 ## Generator Pipeline (`generator/`)

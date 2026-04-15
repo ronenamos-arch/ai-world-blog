@@ -53,7 +53,11 @@ ls -lh blog/public/images/posts/your-image.jpg
 ogImage: /images/posts/your-image.jpg  # Must start with /images/posts/
 ```
 
-### 3. Test Locally (If Available)
+### 3. About the Author Section
+
+✅ **Automatic** — Every post includes an "About the Author" section showing רונן עמוס's info and a link to https://ronenamoscpa.co.il. This is built into the post layout (`blog/src/layouts/PostDetails.astro`) and requires **no per-post configuration**.
+
+### 4. Test Locally (If Available)
 
 ```bash
 cd blog
@@ -61,14 +65,14 @@ npm run dev
 # Visit http://localhost:3000 and check if your post appears
 ```
 
-### 4. Commit Message Format
+### 5. Commit Message Format
 
 ```bash
 git commit -m "publish: [Post Title] - brief description"
 # Example: "publish: GitHub for Beginners - Hebrew tutorial"
 ```
 
-### 5. After Push
+### 6. After Push
 
 **Wait for Vercel deployment to complete:**
 1. Push code: `git push`
