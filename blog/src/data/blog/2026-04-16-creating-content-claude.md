@@ -11,7 +11,7 @@ tags:
   - Apify
 featured: false
 draft: false
-ogImage: /images/posts/Claude Managed Agents.jfif
+ogImage: /images/posts/claude-agents.jfif
 ---
 
 ## מכונת תוכן מבוססת AI: שילוב Claude Cowork עם Apify

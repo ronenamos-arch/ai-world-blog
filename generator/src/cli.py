@@ -19,6 +19,7 @@ def main():
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--url", help="HowDoIUseAI URL to generate a post from")
     source.add_argument("--next", action="store_true", help="Pick the next URL from queue.yaml")
+    source.add_argument("--publish", help="Mark a generated post as published and update Notion with blog URL (use slug, e.g., '2026-04-14-my-post')")
 
     parser.add_argument(
         "--type",
@@ -44,6 +45,11 @@ def main():
 
     args = parser.parse_args()
 
+    # Handle --publish flag
+    if args.publish:
+        _handle_publish(args.publish)
+        return
+
     topic = None
     if args.next:
         from .queue_manager import get_next
@@ -66,17 +72,63 @@ def main():
         print("Use --no-dedup to force regeneration.")
         sys.exit(0)
 
+    # Mark as "In Progress" in Notion before starting generation
+    if topic and topic.notion_page_id and not args.dry_run:
+        from .notion_client import NotionClient
+        NotionClient().update_status(topic.notion_page_id, "In Progress")
+
     from .pipeline import run
-    result = run(url=url, post_type=post_type, tags=tags, dry_run=args.dry_run)
+    try:
+        result = run(url=url, post_type=post_type, tags=tags, dry_run=args.dry_run)
+    except Exception as e:
+        # Update Notion with error status if generation fails
+        if topic and topic.notion_page_id and not args.dry_run:
+            from .notion_client import NotionClient
+            NotionClient().update_error(topic.notion_page_id, str(e))
+        raise
 
     if not args.dry_run:
         print(f"\nDone! Post saved as draft: {result['output_path']}")
         print("Edit draft: false in the frontmatter to publish.")
-        
+
         if topic and topic.notion_page_id:
             from .notion_client import NotionClient
-            NotionClient().update_status(topic.notion_page_id, "Done")
-            print(f"Updated Notion entry: {topic.notion_page_id} status set to Done")
+            notion = NotionClient()
+
+            # Update metrics
+            notion.update_generation_metrics(
+                topic.notion_page_id,
+                score=result.get('score', 0),
+                word_count=result.get('word_count', 0),
+                slug=result.get('slug', '')
+            )
+
+            # Set status to "Ready to Publish"
+            notion.update_status(topic.notion_page_id, "Ready to Publish")
+            print(f"Updated Notion entry: metrics saved, status set to Ready to Publish")
+
+
+def _handle_publish(slug: str):
+    """Mark a post as published and update Notion with blog URL."""
+    from .notion_client import NotionClient
+
+    print(f"Post slug: {slug}")
+    notion_page_id = input("Enter the Notion page ID for this post: ").strip()
+    if not notion_page_id:
+        print("Skipped updating Notion.")
+        return
+
+    # Build blog URL
+    blog_url = f"https://ai-world-blog.vercel.app/{slug}/"
+
+    # Update Notion
+    notion = NotionClient()
+    notion.update_blog_url(notion_page_id, blog_url)
+    notion.update_status(notion_page_id, "Published")
+
+    print(f"\n✓ Updated Notion for {slug}")
+    print(f"  URL: {blog_url}")
+    print(f"  Status: Published")
 
 
 if __name__ == "__main__":
