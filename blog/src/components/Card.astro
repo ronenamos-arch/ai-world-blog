@@ -6,23 +6,41 @@ import Datetime from "./Datetime.astro";
 
 type Props = {
   variant?: "h2" | "h3";
+  class?: string;
+  isHero?: boolean;
 } & CollectionEntry<"blog">;
 
-const { variant: Heading = "h2", id, data, filePath } = Astro.props;
+const { variant: Heading = "h2", id, data, filePath, body, isHero = false, class: className = "" } = Astro.props;
 
 const { title, description, ogImage, ...props } = data;
 
 const postUrl = getPath(id, filePath);
 const imageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src ?? null;
+
+// חישוב זמן קריאה משוער
+const wordsPerMinute = 200;
+const wordCount = body ? body.split(/\s+/g).length : 0;
+const readingTime = Math.ceil(wordCount / wordsPerMinute);
+
+// צבעים לתגיות (דוגמה)
+const tagColors: Record<string, string> = {
+  "AI": "bg-purple-500/10 text-purple-600 dark:text-purple-400",
+  "סוכנים": "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+  "אוטומציה": "bg-green-500/10 text-green-600 dark:text-green-400",
+  "כללי": "bg-accent/10 text-accent",
+};
 ---
 
-<li class="my-4">
+<li class:list={["my-4 list-none", className]}>
   <a
     href={postUrl}
-    class="group block h-full overflow-hidden rounded-3xl border border-border bg-background/50 transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/5"
+    class:list={[
+      "group block h-full overflow-hidden rounded-3xl border border-border bg-background/50 transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/5",
+      isHero ? "lg:flex lg:items-stretch" : ""
+    ]}
   >
     <!-- תמונה -->
-    <div class="aspect-video w-full overflow-hidden bg-muted">
+    <div class:list={["overflow-hidden bg-muted", isHero ? "lg:w-3/5 aspect-video" : "w-full aspect-video"]}>
       {imageUrl ? (
         <img
           src={imageUrl}
@@ -38,15 +56,24 @@ const imageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src ?? null;
     </div>
 
     <!-- תוכן -->
-    <div class="flex flex-col p-6">
-      <div class="mb-2 flex items-center gap-2">
-        {data.tags.slice(0, 1).map(tag => (
-          <span class="text-[10px] font-bold uppercase tracking-widest text-accent/80">{tag}</span>
+    <div class:list={["flex flex-col p-6", isHero ? "lg:w-2/5 lg:justify-center" : ""]}>
+      <div class="mb-3 flex flex-wrap items-center gap-2">
+        {data.tags.slice(0, 2).map(tag => (
+          <span class:list={[
+            "rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider",
+            tagColors[tag] || "bg-accent/10 text-accent"
+          ]}>
+            {tag}
+          </span>
         ))}
+        <span class="ms-auto text-[10px] font-medium opacity-50">{readingTime} דק' קריאה</span>
       </div>
       
       <Heading
-        class="text-xl font-bold leading-tight text-foreground group-hover:text-accent transition-colors"
+        class:list={[
+          "font-bold leading-tight text-foreground group-hover:text-accent transition-colors",
+          isHero ? "text-2xl sm:text-3xl" : "text-xl"
+        ]}
         style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
       >
         {title}
@@ -54,7 +81,10 @@ const imageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src ?? null;
       
       <Datetime class="mt-2 text-xs opacity-70" {...props} />
       
-      <p class="mt-3 text-sm leading-relaxed text-foreground/70 line-clamp-2">
+      <p class:list={[
+        "mt-3 text-sm leading-relaxed text-foreground/70",
+        isHero ? "line-clamp-4" : "line-clamp-2"
+      ]}>
         {description}
       </p>
       
