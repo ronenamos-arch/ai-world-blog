@@ -9,6 +9,7 @@ tags:
   - אוטומציה
 featured: false
 draft: false
+guideTitle: "מדריך סוכני ה-AI המלא"
 ogImage: /images/posts/ai-agents-platforms-business-2026-guide.png
 ---
 

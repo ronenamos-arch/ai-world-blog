@@ -1,0 +1,118 @@
+---
+interface Props {
+  postTitle: string;
+  guideTitle?: string;
+}
+
+const { postTitle, guideTitle = "המדריך המלא" } = Astro.props;
+---
+
+<div class="lead-gen-container my-12" id="lead-gen-section">
+  <div class="inline-lead-box relative overflow-hidden rounded-3xl border-2 border-accent bg-background/50 p-8 text-center backdrop-blur-xl transition-all hover:shadow-2xl hover:shadow-accent/10">
+    <div class="absolute -left-4 -top-4 rotate-12 text-6xl opacity-10">🎁</div>
+    
+    <h2 class="text-2xl font-black text-accent sm:text-3xl">רוצים את {guideTitle}?</h2>
+    <p class="mt-2 text-lg opacity-90">הזינו פרטים וקבלו את המדריך המעשי ישירות אליכם.</p>
+    
+    <form id="lead-form" class="mt-8 flex flex-col gap-4 text-start">
+      <input type="hidden" name="postTitle" value={postTitle} />
+      
+      <div class="flex flex-col gap-1">
+        <label for="email" class="ms-3 text-xs font-bold uppercase tracking-wider text-accent">אימייל למשלוח:</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          required 
+          placeholder="you@example.com"
+          class="rounded-2xl border-2 border-border bg-background p-4 outline-none transition-all focus:border-accent focus:ring-4 focus:ring-accent/5"
+        />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="phone" class="ms-3 text-xs font-bold uppercase tracking-wider text-accent">וואטסאפ (אופציונלי):</label>
+        <input 
+          type="tel" 
+          id="phone" 
+          name="phone" 
+          placeholder="050-0000000"
+          class="rounded-2xl border-2 border-border bg-background p-4 outline-none transition-all focus:border-accent focus:ring-4 focus:ring-accent/5"
+        />
+      </div>
+
+      <button 
+        type="submit" 
+        id="submit-btn"
+        class="mt-4 flex items-center justify-center rounded-2xl bg-accent p-5 text-lg font-black text-background shadow-lg shadow-accent/20 transition-all hover:-translate-y-1 hover:brightness-110 active:scale-95 disabled:opacity-50"
+      >
+        <span>שלחו לי את המדריך!</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="ms-2">
+          <path d="m22 2-7 20-4-9-9-4Z"></path>
+          <path d="M22 2 11 13"></path>
+        </svg>
+      </button>
+
+      <p id="form-status" class="mt-2 text-center text-sm font-bold transition-all opacity-0"></p>
+      <p class="mt-2 text-center text-[10px] opacity-50">🔒 המידע שלכם מאובטח. אנחנו לא שולחים ספאם.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+  // שימוש ב-Astro:page-load כדי לוודא שזה עובד גם בניווט בין דפים
+  document.addEventListener("astro:page-load", () => {
+    const form = document.querySelector("#lead-form") as HTMLFormElement;
+    const status = document.querySelector("#form-status") as HTMLElement;
+    const submitBtn = document.querySelector("#submit-btn") as HTMLButtonElement;
+
+    if (!form || !status || !submitBtn) return;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      // שינוי מצב כפתור
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = "שולח...";
+      
+      const formData = new FormData(form);
+      const data = {
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        postTitle: formData.get("postTitle"),
+      };
+
+      // כאן נשים את ה-URL של ה-Google Apps Script שלך
+      // בינתיים זה ישלח הודעה לקונסול
+      const SCRIPT_URL = "YOUR_SCRIPT_URL_HERE"; 
+
+      try {
+        if (SCRIPT_URL === "YOUR_SCRIPT_URL_HERE") {
+          console.log("Mock submission:", data);
+          // סימולציה של הצלחה אם אין עדיין URL
+          await new Promise(r => setTimeout(r, 1000));
+        } else {
+          await fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors", // חשוב עבור Google Apps Script
+            cache: "no-cache",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+        }
+
+        // הצלחה
+        status.textContent = "✅ נשלח בהצלחה! המדריך בדרך אליך.";
+        status.classList.remove("text-red-500");
+        status.classList.add("text-green-500", "opacity-100");
+        form.reset();
+        submitBtn.innerHTML = "קיבלנו! תודה.";
+      } catch (error) {
+        console.error(error);
+        status.textContent = "❌ חלה שגיאה. נסו שוב מאוחר יותר.";
+        status.classList.add("text-red-500", "opacity-100");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "נסו שוב";
+      }
+    });
+  });
+</script>
