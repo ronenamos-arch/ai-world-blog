@@ -8,7 +8,7 @@ tags:
   - AI
 featured: true
 draft: false
-ogImage: /images/posts/welcome.jpg
+ogImage: /images/posts/Ai world.png
 ---
 
 ## מה זה "עולם ה AI"?
