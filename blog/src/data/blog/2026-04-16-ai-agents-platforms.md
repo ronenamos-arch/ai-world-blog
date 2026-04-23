@@ -9,7 +9,7 @@ tags:
   - אוטומציה
 featured: false
 draft: false
-ogImage: /images/posts/AIIAGENTS.jpeg
+ogImage: /images/posts/ai-agents-platforms-business-2026-guide.jpeg
 ---
 
 AI כבר לא עוסק רק בשאלות והשגת תשובות.

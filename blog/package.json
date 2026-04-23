@@ -11,22 +11,29 @@
     "astro": "astro",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "generate": "node scripts/notion-to-post.js",
+    "publish": "node scripts/publish-post.js"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.71",
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
+    "@notionhq/client": "^5.20.0",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.1.18",
+    "ai": "^6.0.168",
     "astro": "^5.16.6",
     "dayjs": "^1.11.19",
+    "dotenv": "^17.4.2",
     "lodash.kebabcase": "^4.1.1",
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",
     "satori": "^0.18.3",
     "sharp": "^0.34.5",
     "slugify": "^1.6.6",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
