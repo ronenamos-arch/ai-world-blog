@@ -2,6 +2,9 @@
 
 This file tells AI agents (Claude, Gemini, etc.) how this project works and what mistakes to avoid. **Read this file before making any changes.**
 
+## Operational System
+Before starting any work session, read and follow [`assistant.md`](assistant.md).
+
 ---
 
 ## Project Overview
