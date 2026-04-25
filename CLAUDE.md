@@ -3,7 +3,8 @@
 This file tells AI agents (Claude, Gemini, etc.) how this project works and what mistakes to avoid. **Read this file before making any changes.**
 
 ## Operational System
-Before starting any work session, read and follow [`assistant.md`](assistant.md).
+**MANDATORY:** Read [`assistant.md`](assistant.md) now, before doing anything else.
+When the user sends the message `session`, immediately execute the Session Start Protocol defined in `assistant.md`. Do not greet. Do not ask what to do. Execute the protocol and report.
 
 ---
 
