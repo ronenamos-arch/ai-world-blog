@@ -33,8 +33,6 @@ ogImage: /images/posts/ai-agents-github-squad-guide-2026.jpeg
 
 הכי חשוב: הכול קורה בתוך GitHub, לא באפליקציה חיצונית שצריך לזכור לפתוח.
 
-**קישור:** [נסו את Squad](https://github.com/microsoft/squad)
-
 ## 2. **GitHub Issues + Project Board** – מערכת המשימות שמעדכנת את עצמה
 
 ה-Squad כבר יודע איך לעבוד עם Issues ב-GitHub, אז בניתי מעליו מערכת של תוויות וסטטוסים. אני פותח Issue חדש, מסמן אותו כ-**Todo** – והצוות קולט אותו. הם מעבירים אותו ל-**In Progress** אוטומטית, ואם הם צריכים שאבדוק משהו או שאקבל החלטה, הם משנים את הסטטוס ל-**Pending User**.
