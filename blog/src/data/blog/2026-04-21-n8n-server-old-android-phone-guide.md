@@ -10,7 +10,7 @@ tags:
   - חיסכון בעלויות
   - DIY
 featured: false
-draft: true
+draft: false
 ogImage: /images/posts/n8n-server-old-android-phone-guide.png
 ---
 יש לכם טלפון אנדרויד ישן במגירה? אצלי היה שוכב Samsung Galaxy S9 עם גב סדוק, סוללה למחצה, ממש לא עושה כלום. בינתיים שילמתי כ-40 דולר בחודש על VPS רק כדי להריץ כמה תהליכי **n8n** שרצים פעמיים ביום. ערב אחד החשבון פשוט הפסיק להיות הגיוני.

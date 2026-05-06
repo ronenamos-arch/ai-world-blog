@@ -10,7 +10,7 @@ tags:
   - פרודוקטיביות
   - אבטחה
 featured: false
-draft: true
+draft: false
 ogImage: /images/posts/claude-managed-agents-practical-guide-2026.png
 ---
 רוב האנשים שמנסים לבנות סוכן AI נתקעים באותם מקומות: לולאת Agent מסובכת, ניהול context, הרצת קוד בסנדבוקס, שמירת state לאורך זמן, ואבטחה סביב מפתחות וגישה ל-GitHub או למסדי נתונים. התוצאה היא מערכות שבקושי מחזיקות יום בלי שצריך "לטפל בשרת", במקום סוכן יציב שאפשר לסמוך עליו.

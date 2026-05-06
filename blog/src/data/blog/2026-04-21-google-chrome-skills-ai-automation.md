@@ -10,7 +10,7 @@ tags:
   - פרומפטים
   - פרודוקטיביות
 featured: false
-draft: true
+draft: false
 ogImage: /images/posts/google-chrome-skills-ai-automation.png
 ---
 ## מה שהיה חסר ל-AI בדפדפן

@@ -10,7 +10,7 @@ tags:
   - פרודוקטיביות
   - Microsoft Copilot
 featured: false
-draft: true
+draft: false
 ogImage: /images/posts/ai-agents-platforms-business-2026-guide.png
 ---
 אם אתם עדיין חושבים על AI בתור צ'אט שעונה על שאלות, אתם מפספסים מהפכה שקורה עכשיו. ב-2026, **סוכני AI (AI Agents)** כבר לא רק משיבים - הם **מתכננים, מחליטים ומבצעים פעולות**. הם מעדכנים מערכות, עוקבים אחרי לקוחות, מייצרים דוחות ומריצים תהליכים שלמים בלי התערבות אנושית.
