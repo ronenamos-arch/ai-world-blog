@@ -10,8 +10,8 @@ tags:
   - Squad
   - פרודוקטיביות
 featured: false
-draft: true
-ogImage: /images/post s/ai-agents-github-squad-guide-2026.jpeg
+draft: false
+ogImage: /images/posts/ai-agents-github-squad-guide-2026.jpeg
 ---
 ## למה כל מערכת משימות קורסת אחרי שבועיים
 
