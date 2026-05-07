@@ -81,30 +81,28 @@ const { postTitle, guideTitle = "המדריך המלא" } = Astro.props;
         postTitle: formData.get("postTitle"),
       };
 
-      // ה-URL של ה-Google Apps Script שלך
-      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzsY4v0hDIaGEouQcnErXjNfOiZ7UcFyb3Jd4LryW621-I3ldZgY65Bqf47_u5Zah8P/exec"; 
+      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQgtP3YtFfBxrfHfCe3vcrcEgQrVYv1jQIUMqn2u43w15p0OhguLS4-3640BKPP9Nt/exec";
 
       try {
         if (SCRIPT_URL === "YOUR_SCRIPT_URL_HERE") {
           console.log("Mock submission:", data);
-          // סימולציה של הצלחה אם אין עדיין URL
           await new Promise(r => setTimeout(r, 1000));
         } else {
           await fetch(SCRIPT_URL, {
             method: "POST",
-            mode: "no-cors", // חשוב עבור Google Apps Script
+            mode: "no-cors",
             cache: "no-cache",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
           });
         }
 
-        // הצלחה
-        status.textContent = "✅ נשלח בהצלחה! המדריך בדרך אליך.";
+        status.textContent = "✅ נשלח בהצלחה! המדריך נפתח עכשיו...";
         status.classList.remove("text-red-500");
         status.classList.add("text-green-500", "opacity-100");
         form.reset();
         submitBtn.innerHTML = "קיבלנו! תודה.";
+        window.open("https://gamma.app/docs/-wvnq78lnyv3cj4f", "_blank");
       } catch (error) {
         console.error(error);
         status.textContent = "❌ חלה שגיאה. נסו שוב מאוחר יותר.";

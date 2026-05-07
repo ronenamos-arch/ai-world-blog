@@ -103,7 +103,7 @@ const { postTitle, guideTitle = "המדריך המלא" } = Astro.props;
         postTitle: formData.get("postTitle"),
       };
 
-      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzsY4v0hDIaGEouQcnErXjNfOiZ7UcFyb3Jd4LryW621-I3ldZgY65Bqf47_u5Zah8P/exec"; 
+      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQgtP3YtFfBxrfHfCe3vcrcEgQrVYv1jQIUMqn2u43w15p0OhguLS4-3640BKPP9Nt/exec";
 
       try {
         if (SCRIPT_URL !== "YOUR_SCRIPT_URL_HERE") {
@@ -114,9 +114,10 @@ const { postTitle, guideTitle = "המדריך המלא" } = Astro.props;
             body: JSON.stringify(data),
           });
         }
-        
-        status.textContent = "✅ נשלח! המדריך בדרך.";
+
+        status.textContent = "✅ נשלח! המדריך נפתח עכשיו...";
         status.classList.add("text-green-500", "opacity-100");
+        window.open("https://gamma.app/docs/-wvnq78lnyv3cj4f", "_blank");
         setTimeout(() => {
           popup.classList.add("translate-y-[150%]", "opacity-0");
         }, 2000);
