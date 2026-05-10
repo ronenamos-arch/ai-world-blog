@@ -114,6 +114,23 @@ Serves blog/dist/ as static site
 
 ---
 
+## Lead Capture System
+
+Two components collect email leads and send them to a Google Sheet:
+
+- `blog/src/components/LeadPopup.astro` — slide-up popup (bottom-right), appears after 30% scroll or 8 seconds
+- `blog/src/components/LeadGen.astro` — inline form, embedded inside post body
+
+**Google Apps Script URL** (do NOT change without updating both files):
+`https://script.google.com/macros/s/AKfycbwD-g9O9vPb2zfMjCDsHPdS4XI5WPLrjeAv0TkQeobud5120_MhdQKPsjVodBUsAYE27w/exec`
+
+**Guide delivered on success:** `https://gamma.app/docs/-wvnq78lnyv3cj4f`
+
+The Google Sheet is bound to the Apps Script (owned by ronenamos@gmail.com).
+Submissions are saved as rows: timestamp | email | phone | postTitle.
+
+---
+
 ## Generator Pipeline (`generator/`)
 
 ```bash
