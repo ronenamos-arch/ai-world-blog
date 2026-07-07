@@ -1,7 +1,7 @@
 ---
 title: "7 דרכים מעשיות לחסוך טוקנים ב-Claude Code (ולהפסיק להיתקע במגבלות)"
 description: "Claude Code שורף טוקנים בגלל קונטקסט מבולגן, לא בגלל פרומפטים גרועים. 7 טכניקות פשוטות – החלפת מודלים, CLAUDE.md רזה, subagents ו-/compact – שיחסכו לכם כסף ומכסות."
-pubDatetime: 2026-07-07T14:00:00+03:00
+pubDatetime: 2026-07-07T12:00:00+03:00
 author: מומחה ה AI שלכם
 tags:
   - Claude Code
