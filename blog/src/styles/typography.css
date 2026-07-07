@@ -36,6 +36,33 @@
       @apply overflow-x-clip;
     }
 
+    /* Thin gold frame around lists and code blocks to break up the text */
+    ul,
+    ol {
+      border: 1px solid rgba(212, 175, 85, 0.55);
+      border-radius: 0.75rem;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      padding-inline-start: 2.25rem;
+      padding-inline-end: 1rem;
+    }
+
+    ul ul,
+    ul ol,
+    ol ul,
+    ol ol {
+      border: none;
+      border-radius: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-inline-end: 0;
+    }
+
+    pre {
+      border: 1px solid rgba(212, 175, 85, 0.55) !important;
+      border-radius: 0.75rem;
+    }
+
     li {
       @apply marker:text-accent;
     }
