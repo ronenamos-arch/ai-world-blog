@@ -1,11 +1,15 @@
 ﻿---
 name: ai-world-publisher
-description: Workflow to fetch an article header and URL from Notion, translate/adapt it to Hebrew in the AI World blog voice, strip foreign ads/CTAs, categorize in Notion, create/embed header images, preview locally on Astro, and deploy on approval.
+description: Workflow to fetch an article header and URL from Notion, translate/adapt it to Hebrew in the AI World blog voice, strip foreign ads/CTAs, categorize in Notion, create/embed header images and inline infographics/screenshots, generate a high-converting Facebook post (no emojis, no dashes), preview locally on Astro, and deploy on approval.
 ---
 
 # AI World Blog - Notion-to-Publish Workflow
 
 Use this skill when processing articles from the Notion content database into high-quality Hebrew blog posts on ai-world-blog.
+
+## How to Trigger
+- Natural language: "פרסם את הפוסט הבא מנושן" / "תפעיל את הסקיל על הפוסט <כותרת>" / "Publish next post from Notion".
+- Or simply mention `@ai-world-publisher` or provide a Notion topic name / URL.
 
 ## 1. Notion Integration & Queue Fetch
 
@@ -23,7 +27,7 @@ Use this skill when processing articles from the Notion content database into hi
 ## 3. Hebrew Writing & Voice Guidelines
 
 - **Tone**: Natural Israeli Hebrew in 2nd-person plural (אתם, תוכלו), direct and practical, zero machine-translation phrasing.
-- **Terms**: Keep tool names, model names, and code/tech terms in English (e.g., Gemini, Claude, n8n, API, Python, Markdown).
+- **Terms**: Keep tool names, model names, and code/tech terms in English (e.g., Gemini, Claude, Copilot, n8n, API, Python, Markdown).
 - **Structure**:
   1. Frontmatter:
      `yaml
@@ -44,21 +48,29 @@ Use this skill when processing articles from the Notion content database into hi
   4. Closing `## סיכום` with practical takeaways.
   - Note: About-the-Author box and Telegram CTA are injected automatically by `PostDetails.astro` layout.
 
-## 4. Image Handling
+## 4. Visual Elements & Image Handling (Mandatory)
 
-- Check for quality content diagrams/screenshots from the source or user uploads.
-- Save to `blog/public/images/posts/<slug>-*.png/jpg`.
-- If a new cover image is needed, generate a clean 16:9 minimalist 3D graphic and save to `blog/public/images/posts/<slug>.jpg`.
-- Reference in frontmatter as `ogImage: /images/posts/<slug>.jpg`.
+Articles must never look like plain text documents. Always provide rich visuals:
+1. **Cover/Header Image**: High quality 16:9 3D graphic / illustration saved to `blog/public/images/posts/<slug>.jpg` and referenced as `ogImage: /images/posts/<slug>.jpg`.
+2. **Inline Infographic / Workflow Diagram**: Create a sleek visual process chart / diagram for the workflow and place it in the introduction or between sections.
+3. **UI Screenshots / Mockups**: Real screenshots or clean UI mockups of the tool in action, showing settings or prompt execution.
+4. Save all assets to `blog/public/images/posts/` and embed with standard markdown `![תיאור תמונה](/images/posts/<filename>)`.
 
-## 5. Notion Metadata Sync
+## 5. Facebook Post Generation & Notion Sync
+
+Generate an attractive Facebook post designed to bring traffic to the blog post:
+- **Hook**: Strong opening addressing a pain point or opportunity.
+- **Value**: Concise bullet points highlighting what they will discover in the guide.
+- **Call to action**: Direct link to the post on the website.
+- **STRICT RULES**:
+  - **NO emojis at all** (0 emojis).
+  - **NO em-dashes (—) and NO hyphens (-)** anywhere in the Hebrew copy.
+  - Written in natural, compelling Hebrew.
 
 Update the page in Notion with:
-- `Slug`: `<slug>`
-- `Meta Description`: `<description>`
-- `Alt Text`: `<image alt>`
-- `קטגוריה`: Multi-select tags matching content (e.g. פרודוקטיביות, אוטומציה, Gemini)
-- `מילים`: Word count
+- `facebook-post`: The generated Facebook post text
+- `Meta Description`: Description text
+- `קטגוריה`: Multi-select tags matching content
 - `ניקוד`: Quality score (1-10)
 
 ## 6. Local Dev & Preview
@@ -66,7 +78,7 @@ Update the page in Notion with:
 - Save post file to `blog/src/data/blog/YYYY-MM-DD-<slug>.md`.
 - Run `npx astro build` in `blog/` to ensure 0 build errors.
 - Ensure dev server is running on `http://localhost:4321/`.
-- Provide the user with the direct preview link: `http://localhost:4321/posts/YYYY-MM-DD-<slug>/`.
+- Provide the user with the direct preview link: `http://localhost:4321/posts/YYYY-MM-DD-<slug>/` and display the Facebook post text for review.
 - **Stop and wait for human review.**
 
 ## 7. Deploy & Final Publish
