@@ -6,6 +6,11 @@
 .env.*.local
 *.pem
 *.key
+env.txt
+.tokensave/
+.playwright-mcp/
+Ronen/
+scripts/
 
 # ──────────────────────────────────────────────
 # Node / Astro (blog/)
