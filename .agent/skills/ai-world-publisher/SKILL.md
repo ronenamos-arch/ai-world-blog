@@ -1,4 +1,4 @@
-﻿---
+---
 name: ai-world-publisher
 description: Workflow to fetch an article header and URL from Notion, translate/adapt it to Hebrew in the AI World blog voice, strip foreign ads/CTAs, categorize in Notion, create/embed header images and inline infographics/screenshots, generate a high-converting Facebook post (no emojis, no dashes), preview locally on Astro, and deploy on approval.
 ---
@@ -94,3 +94,5 @@ When the user approves:
    - `לינק לפוסט`: `https://ai-world-blog.vercel.app/posts/YYYY-MM-DD-<slug>/`
    - `תאריך פרסום`: Current date
 5. Verify live post on `https://ai-world-blog.vercel.app/posts`.
+6. **Auto-Submit to Google Search Console**:
+   - Run `python scripts/gsc_client.py submit-post --url "https://ai-world-blog.vercel.app/posts/YYYY-MM-DD-<slug>/"` to automatically refresh the sitemap and request indexing.

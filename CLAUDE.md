@@ -110,6 +110,14 @@ Serves blog/dist/ as static site
 2. Save the post image to `blog/public/images/posts/slug.jpg`
 3. Push — Vercel auto-deploys
 
+**Gotchas (learned July 2026):**
+- `pubDatetime` must be in the **past** — `postFilter.ts` hides future-dated posts from the /posts listing in production (the post URL works but it's invisible in the list).
+- `draft: true` posts are hidden **even in local dev** — to preview locally, set `draft: false` and just don't push until approved.
+- `pnpm` is not on PATH on this machine — use `npx astro build` / `npx astro dev` (port 4321).
+- Preferred workflow: use the `/create-post <url>` command (`.claude/commands/create-post.md`) — it handles research, images, Hebrew writing rules, local preview, and deploy-on-approval.
+- Posts are **independent**: never link or credit the source article.
+- Layout: the post title comes first, with the `ogImage` rendered below it as a regular image (`PostDetails.astro`); lists/code blocks get a thin gold frame (`typography.css`). Don't reintroduce a background hero image.
+
 **Note:** Every post automatically includes an "About the Author" section (רונן עמוס - יועץ CFO חיצוני ומומחה AI לפיננסים) before the Telegram CTA. This is part of `blog/src/layouts/PostDetails.astro` and applies to all posts — no per-post configuration needed.
 
 ---

@@ -68,6 +68,12 @@ const layoutProps = {
   canonicalURL,
   ogImage,
   scrollSmooth: true,
+  pageType: "article" as const,
+  breadcrumbs: [
+    { name: "בית", item: "/" },
+    { name: "פוסטים", item: "/posts/" },
+    { name: title, item: getPath(post.id, post.filePath) },
+  ],
 };
 
 /* ========== Prev/Next Posts ========== */

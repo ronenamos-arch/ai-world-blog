@@ -62,3 +62,11 @@ Thumbs.db
 .idea/
 .vscode/
 !.vscode/settings.json.example
+# Secrets & Credentials
+gsc-credentials.json
+*.key.json
+.env
+env.txt
+node_modules/
+dist/
+.astro/
