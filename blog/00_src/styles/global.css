@@ -1,0 +1,98 @@
+@import "tailwindcss";
+@import "./typography.css";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+:root,
+html[data-theme="light"] {
+  --background: #fafafa;
+  --foreground: #181528;
+  --accent: #4f46e5;
+  --muted: #f0effa;
+  --muted-foreground: #5a5675;
+  --border: #dcdaee;
+  --card: #ffffff;
+  --card-foreground: #181528;
+}
+
+html[data-theme="dark"] {
+  --background: #0f0f1a;
+  --foreground: #edeaf8;
+  --accent: #818cf8;
+  --muted: #1c1933;
+  --muted-foreground: #a6a3c4;
+  --border: #2d294f;
+  --card: #151326;
+  --card-foreground: #edeaf8;
+}
+
+@theme inline {
+  --font-app: var(--font-heebo);
+  --font-code: var(--font-google-sans-code);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-primary: var(--accent);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-accent/75;
+    scrollbar-width: auto;
+    scrollbar-color: var(--color-muted) transparent;
+  }
+  html {
+    @apply overflow-y-scroll scroll-smooth;
+  }
+  body {
+    @apply flex min-h-svh flex-col bg-background font-app text-foreground selection:bg-accent/75 selection:text-background;
+  }
+  a,
+  button {
+    @apply outline-offset-1 outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@utility max-w-app {
+  @apply max-w-6xl;
+}
+
+@utility app-layout {
+  @apply mx-auto w-full max-w-app px-4;
+}
+
+@utility glassmorphism {
+  @apply bg-background/60 backdrop-blur-md border border-white/10 dark:border-white/5;
+}
+
+@utility premium-shadow {
+  @apply shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.35)];
+}
+
+@utility premium-shadow-hover {
+  @apply hover:shadow-[0_20px_50px_rgba(79,70,229,0.12)] dark:hover:shadow-[0_20px_50px_rgba(129,140,248,0.2)];
+}
+
+@utility premium-btn {
+  @apply inline-flex items-center justify-center rounded-2xl bg-accent text-white border border-white/20 glassmorphism transition-all duration-300;
+  box-shadow: 0 4px 15px -1px var(--accent);
+}
+
+.active-nav {
+  @apply underline decoration-wavy decoration-2 underline-offset-8;
+}
+
+/* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 1rem;
+}

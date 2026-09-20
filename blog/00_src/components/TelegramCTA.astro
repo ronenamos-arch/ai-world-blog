@@ -1,0 +1,48 @@
+---
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+
+interface Props {
+  centered?: boolean;
+}
+
+const { centered = false } = Astro.props;
+---
+
+<section 
+  class:list={[
+    "relative overflow-hidden rounded-3xl premium-shadow border border-border mt-12 mb-8",
+    centered ? "text-center" : ""
+  ]}
+>
+  <!-- Background gradient accent -->
+  <div class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent/20 blur-3xl"></div>
+  <div class="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-accent/10 blur-3xl"></div>
+
+  <div class="relative glassmorphism p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-8">
+    <div class="max-w-xl">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-bold uppercase tracking-wider mb-4 border border-accent/20">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+        </span>
+        חדש! קבוצת הטלגרם שלנו
+      </div>
+      <h2 class="text-3xl font-extrabold tracking-tight mb-4">הצטרפו לקהילת ה-AI של ישראל</h2>
+      <p class="text-foreground/80 text-lg leading-relaxed">
+        עדכונים חמים על כלי AI חדשים, טיפים לשימוש נכון ודיונים מעמיקים - הכל ישירות לנייד שלכם.
+      </p>
+    </div>
+
+    <a 
+      href="https://t.me/AI_World_IL" 
+      target="_blank" 
+      class="premium-btn py-4 px-10 text-xl font-bold hover:scale-105 active:scale-95 group shadow-2xl shadow-accent/20"
+    >
+      להצטרפות בטלגרם
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+      </svg>
+    </a>
+  </div>
+</section>
