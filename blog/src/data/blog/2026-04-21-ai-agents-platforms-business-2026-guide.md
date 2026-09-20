@@ -113,11 +113,12 @@ faqs:
 <span class="text-xs px-2.5 py-1 rounded-full bg-accent/15 text-accent font-semibold">Cross-App Automation</span>
 </div>
 <p class="text-sm text-muted-foreground leading-relaxed mb-4">
-חיבור גמיש בין אלפי אפליקציות שונות. מאפשר להגדיר תהליכים מורכבים בשפה טבעית: קבלת ליד מטיקטוק/פייסבוק &larr; בדיקה במאגר &larr; שליחת הודעת וואטסאפ &larr; יצירת משימה ב-Trello.
+חיבור גמיש בין אלפי אפליקציות שונות. מאפשר להגדיר תהליכים מורכבים בשפה טבעית: קבלת ליד מטיקטוק/פייסבוק &larr; בדיקה במאגר &larr; שליחת הודעת וואטסאפ &larr; יצירת משימה ב-Trello. פלטפורמת <strong>n8n</strong> מובילה במיוחד בזכות היותה בקוד פתוח ומתן שליטה מלאה בנתונים ובסוכנים.
 </p>
 <div class="space-y-2 text-xs border-t border-border/40 pt-3">
 <div><strong class="text-foreground">למה זה טוב?</strong> גמישות מוחלטת לחיבור כלים שונים ללא צורך בפיתוח API ייעודי.</div>
 <div><strong class="text-foreground">למי הכי מתאים?</strong> עסקים קטנים ובינוניים, יזמים וצוותי שיווק שמשתמשים בכלים מגוונים.</div>
+<div class="pt-1"><strong class="text-accent">מדריך מעשי מומלץ:</strong> <a href="/posts/2026-09-20-build-first-ai-agent-n8n-no-code-guide" class="text-accent hover:underline font-semibold">איך לבנות סוכן AI ראשון ב-n8n בלי לכתוב שורת קוד אחת &larr;</a></div>
 </div>
 </div>
 
@@ -262,14 +263,14 @@ faqs:
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-<a href="/posts/2026-04-21-n8n-server-old-android-phone-guide" class="group flex flex-col overflow-hidden rounded-2xl border border-border/80 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg no-underline">
+<a href="/posts/2026-09-20-build-first-ai-agent-n8n-no-code-guide" class="group flex flex-col overflow-hidden rounded-2xl border border-border/80 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg no-underline">
 <div class="aspect-video w-full overflow-hidden bg-muted">
-<img src="/images/posts/n8n-server-old-android-phone-guide.png" alt="מדריך שרת n8n" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105 m-0 border-0" />
+<img src="/images/posts/build-first-ai-agent-n8n-no-code-guide.png" alt="מדריך סוכן AI ראשון ב-n8n" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105 m-0 border-0" />
 </div>
 <div class="flex flex-1 flex-col p-4">
-<span class="text-xs font-bold text-accent mb-1">אוטומציה בקוד פתוח</span>
-<h4 class="text-base font-bold text-foreground group-hover:text-accent transition-colors m-0 leading-snug">איך להקים שרת אוטומציות n8n ביתי בחינם מטלפון אנדרואיד ישן</h4>
-<p class="text-xs text-muted-foreground mt-2 line-clamp-2 leading-relaxed">הופכים סלולרי ישן לשרת אוטומציות פרטי שרץ 24/7 ב-0 שקלים.</p>
+<span class="text-xs font-bold text-accent mb-1">מדריך מעשי No-Code</span>
+<h4 class="text-base font-bold text-foreground group-hover:text-accent transition-colors m-0 leading-snug">איך לבנות סוכן AI ראשון ב-n8n בלי לכתוב שורת קוד אחת</h4>
+<p class="text-xs text-muted-foreground mt-2 line-clamp-2 leading-relaxed">חיבור מודל שפה, זיכרון שיחה, קריאה לכלים חיצוניים ואוטומציה עסקית מלאה.</p>
 <span class="mt-auto pt-3 text-xs font-semibold text-accent flex items-center gap-1">לקריאת המדריך &larr;</span>
 </div>
 </a>
