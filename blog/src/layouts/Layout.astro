@@ -17,6 +17,8 @@ type Props = {
   scrollSmooth?: boolean;
   pageType?: "website" | "article" | "collection";
   breadcrumbs?: Array<{ name: string; item: string }>;
+  keywords?: string[];
+  faqs?: Array<{ question: string; answer: string }>;
 };
 
 const {
@@ -31,6 +33,8 @@ const {
   scrollSmooth = false,
   pageType,
   breadcrumbs,
+  keywords = [],
+  faqs = [],
 } = Astro.props;
 
 const siteUrl = SITE.website.endsWith("/") ? SITE.website : `${SITE.website}/`;
@@ -92,6 +96,7 @@ if (currentType === "website") {
       "@id": finalCanonicalURL,
     },
     inLanguage: SITE.lang ?? "he",
+    ...(keywords.length > 0 && { keywords: keywords.join(", ") }),
     publisher: {
       "@type": "Organization",
       name: SITE.title,
@@ -101,10 +106,27 @@ if (currentType === "website") {
       {
         "@type": "Person",
         name: `${author}`,
-        ...(profile && { url: profile }),
+        jobTitle: "יועץ עסקי ומומחה AI",
+        url: profile || "https://ronenamoscpa.co.il",
+        sameAs: ["https://ronenamoscpa.co.il"],
       },
     ],
   });
+
+  if (faqs && faqs.length > 0) {
+    structuredDataList.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map(faq => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    });
+  }
 } else {
   structuredDataList.push({
     "@context": "https://schema.org",

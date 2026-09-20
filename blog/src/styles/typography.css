@@ -3,19 +3,16 @@
 @layer base {
   /* ===== Override default Tailwind Typography styles ===== */
   .app-prose {
-    @apply prose;
+    @apply prose max-w-none;
     font-size: 1.125rem;
+    line-height: 1.8;
 
     h1,
     h2,
     h3,
     h4,
     th {
-      @apply mb-3 text-foreground;
-    }
-
-    h3 {
-      @apply italic;
+      @apply mb-4 text-foreground font-bold;
     }
 
     p,
@@ -29,38 +26,33 @@
     }
 
     a {
-      @apply wrap-break-word text-foreground decoration-dashed underline-offset-4 hover:text-accent focus-visible:no-underline;
+      @apply wrap-break-word text-accent font-semibold underline-offset-4 hover:underline focus-visible:no-underline;
     }
 
     ul {
       @apply overflow-x-clip;
     }
 
-    /* Thin gold frame around lists and code blocks to break up the text */
+    /* Clean, modern list styling */
     ul,
     ol {
-      border: 1px solid rgba(212, 175, 85, 0.55);
-      border-radius: 0.75rem;
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-      padding-inline-start: 2.25rem;
-      padding-inline-end: 1rem;
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+      padding-inline-start: 1.5rem;
+      padding-inline-end: 0.5rem;
     }
 
     ul ul,
     ul ol,
     ol ul,
     ol ol {
-      border: none;
-      border-radius: 0;
       padding-top: 0;
       padding-bottom: 0;
       padding-inline-end: 0;
     }
 
     pre {
-      border: 1px solid rgba(212, 175, 85, 0.55) !important;
-      border-radius: 0.75rem;
+      @apply rounded-xl border border-border/80 focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-dashed;
     }
 
     li {
@@ -95,7 +87,7 @@
     }
 
     code {
-      @apply rounded bg-muted/75 p-1 wrap-break-word text-foreground before:content-none after:content-none;
+      @apply rounded bg-muted/80 px-1.5 py-0.5 wrap-break-word text-foreground before:content-none after:content-none font-mono text-sm;
     }
 
     .astro-code code {
@@ -107,21 +99,17 @@
     }
 
     details {
-      @apply inline-block cursor-pointer text-foreground select-none [&_p]:hidden [&_ul]:my-0!;
+      @apply block w-full text-foreground;
     }
 
     summary {
-      @apply focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent focus-visible:outline-dashed;
-    }
-
-    pre {
-      @apply focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-dashed;
+      @apply cursor-pointer select-none focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent;
     }
   }
 
   /* ===== Code Blocks & Syntax Highlighting ===== */
   .astro-code {
-    @apply flex border bg-(--shiki-light-bg) text-(--shiki-light) outline-border [&_span]:text-(--shiki-light);
+    @apply flex border border-border rounded-xl bg-(--shiki-light-bg) text-(--shiki-light) outline-border [&_span]:text-(--shiki-light);
   }
 
   html[data-theme="dark"] .astro-code {
@@ -129,7 +117,6 @@
   }
 
   /* Styles for Shiki transformers */
-  /* https://shiki.style/packages/transformers */
   .astro-code {
     .line.diff.add {
       @apply relative inline-block w-full bg-green-400/20 before:absolute before:-left-3 before:text-green-500 before:content-['+'];

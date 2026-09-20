@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Gemini ואוטומציות: איך להפוך את עוזר ה-AI של גוגל למנוע עבודה אוטונומי"
 description: "מדריך מעשי: איך לרתום את מודלי Gemini, סוכני Deep Research וכלי NotebookLM לאוטומציה של משימות, ניתוח נתונים וייעול העבודה ב-Google Workspace."
 pubDatetime: 2026-09-16T10:00:00+03:00

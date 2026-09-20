@@ -6,18 +6,24 @@
 :root,
 html[data-theme="light"] {
   --background: #fafafa;
-  --foreground: #1e1b2e;
+  --foreground: #181528;
   --accent: #4f46e5;
-  --muted: #e8e7f5;
-  --border: #dddaf5;
+  --muted: #f0effa;
+  --muted-foreground: #5a5675;
+  --border: #dcdaee;
+  --card: #ffffff;
+  --card-foreground: #181528;
 }
 
 html[data-theme="dark"] {
   --background: #0f0f1a;
-  --foreground: #e8e6f5;
+  --foreground: #edeaf8;
   --accent: #818cf8;
-  --muted: #1e1b35;
-  --border: #2d2a52;
+  --muted: #1c1933;
+  --muted-foreground: #a6a3c4;
+  --border: #2d294f;
+  --card: #151326;
+  --card-foreground: #edeaf8;
 }
 
 @theme inline {
@@ -26,8 +32,12 @@ html[data-theme="dark"] {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
+  --color-primary: var(--accent);
   --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
 }
 
 @layer base {
@@ -65,15 +75,15 @@ html[data-theme="dark"] {
 }
 
 @utility premium-shadow {
-  @apply shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)];
+  @apply shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.35)];
 }
 
 @utility premium-shadow-hover {
-  @apply hover:shadow-[0_20px_50px_rgba(79,70,229,0.15)] dark:hover:shadow-[0_20px_50px_rgba(129,140,248,0.2)];
+  @apply hover:shadow-[0_20px_50px_rgba(79,70,229,0.12)] dark:hover:shadow-[0_20px_50px_rgba(129,140,248,0.2)];
 }
 
 @utility premium-btn {
-  @apply inline-flex items-center justify-center rounded-2xl bg-accent text-background border border-white/20 glassmorphism transition-all duration-300;
+  @apply inline-flex items-center justify-center rounded-2xl bg-accent text-white border border-white/20 glassmorphism transition-all duration-300;
   box-shadow: 0 4px 15px -1px var(--accent);
 }
 
