@@ -13,7 +13,8 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "generate": "node 02_scripts/notion-to-post.js",
-    "publish": "node 02_scripts/publish-post.js"
+    "publish": "node 02_scripts/publish-post.js",
+    "test:jev": "node 02_scripts/test-jev.js"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.71",

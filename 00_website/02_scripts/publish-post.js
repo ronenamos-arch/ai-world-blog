@@ -1,16 +1,20 @@
 import "dotenv/config";
 import path from "node:path";
 import fs from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
 import { NotionBlog } from "./lib/notion.js";
 import { setDraftFalse } from "./lib/markdown-writer.js";
 import { commitAndPush } from "./lib/git-publisher.js";
+import { evaluateSeoGeoQuality } from "./lib/seo-geo-gate.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BLOG_ROOT = path.resolve(__dirname, "..");
 const REPO_ROOT = path.resolve(BLOG_ROOT, "..");
-const BLOG_POSTS_DIR = path.join(BLOG_ROOT, "src", "data", "blog");
+const BLOG_POSTS_DIR = existsSync(path.join(BLOG_ROOT, "00_src", "data", "blog"))
+  ? path.join(BLOG_ROOT, "00_src", "data", "blog")
+  : path.join(BLOG_ROOT, "src", "data", "blog");
 const SITE_BASE = "https://ai-world-blog.vercel.app/posts/";
 
 async function main() {
@@ -36,7 +40,7 @@ async function main() {
 
   for (const page of pages) {
     const fields = notion.extractFields(page);
-    console.log(`\n▶️  Publishing: "${fields.name}"`);
+    console.log(`\n▶️  Evaluating: "${fields.name}"`);
 
     try {
       if (!fields.slug) {
@@ -50,6 +54,32 @@ async function main() {
         throw new Error(`Markdown file not found for slug: ${fields.slug}`);
       }
       const filePath = path.join(BLOG_POSTS_DIR, match);
+      const fileContent = await fs.readFile(filePath, "utf-8");
+
+      // ⚡ Rapid Pre-Publish SEO & GEO Quality Gate (Zero-Click Answer Scoring)
+      console.log("   ⚡ Running Jev Pre-Publish SEO & GEO Quality Gate...");
+      const seoCheck = await evaluateSeoGeoQuality({
+        title: fields.name,
+        metaDescription: fields.metaDescription,
+        content: fileContent,
+        tags: fields.categories,
+      });
+
+      console.log(
+        `   📊 SEO/GEO Score: ${seoCheck.score}/10 | Zero-Click Answer: ${
+          seoCheck.containsClearAnswerBlock ? "✓" : "✗"
+        } | Natural Hebrew: ${seoCheck.hebrewGrammarNatural ? "✓" : "✗"} (${seoCheck.durationMs || 0}ms)`
+      );
+
+      if (!seoCheck.passesQualityBar) {
+        console.warn(`   ⛔ Blocked by SEO/GEO Gate: ${seoCheck.feedback}`);
+        try {
+          await notion.logError(page.id, `שער SEO/GEO נכשל (ציון: ${seoCheck.score}/10): ${seoCheck.feedback}`);
+        } catch (_) {}
+        continue;
+      }
+
+      console.log(`   ✅ SEO & GEO quality gate passed!`);
 
       // Flip draft: true → false
       const changed = await setDraftFalse(filePath);
@@ -77,7 +107,7 @@ async function main() {
   // Commit and push
   console.log(`\n📦 Committing ${publishedFiles.length} file(s) to git...`);
   try {
-    const message = `Publish ${publishedFiles.length} post(s) from Notion\n\n${publishedPages
+    const message = `Publish ${publishedFiles.length} post(s) from Notion (Jev SEO/GEO verified)\n\n${publishedPages
       .map((p) => `- ${p.fields.name}`)
       .join("\n")}`;
 

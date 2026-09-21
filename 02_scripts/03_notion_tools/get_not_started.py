@@ -3,12 +3,17 @@ import re
 from notion_client import Client
 
 def get_token():
-    env_path = os.path.join(os.path.dirname(__file__), '..', 'env.txt')
-    if os.path.exists(env_path):
-        with open(env_path, 'r', encoding='utf-8') as f:
-            match = re.search(r'notion token\s*=\s*(\S+)', f.read())
-            if match:
-                return match.group(1).strip()
+    candidates = [
+        os.path.join(os.path.dirname(__file__), '..', '..', '06_config_and_credentials', 'env.txt'),
+        os.path.join(os.path.dirname(__file__), '..', 'env.txt'),
+        os.path.join(os.path.dirname(__file__), 'env.txt'),
+    ]
+    for env_path in candidates:
+        if os.path.exists(env_path):
+            with open(env_path, 'r', encoding='utf-8') as f:
+                match = re.search(r'notion token\s*=\s*(\S+)', f.read(), re.I)
+                if match:
+                    return match.group(1).strip()
     return os.getenv('NOTION_TOKEN')
 
 DATABASE_ID = '33d927f0e15480ed8e8ad00e60e47fbb'

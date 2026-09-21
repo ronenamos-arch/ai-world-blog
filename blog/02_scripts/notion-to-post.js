@@ -4,6 +4,8 @@ import { fileURLToPath } from "node:url";
 
 import { NotionBlog } from "./lib/notion.js";
 import { generatePost } from "./lib/ai-generator.js";
+import { evaluateStoryWithJev } from "./lib/jev-evaluator.js";
+import { injectDynamicCta } from "./lib/cta-manager.js";
 import { downloadNotionImage } from "./lib/image-handler.js";
 import { scrapeUrl } from "./lib/url-scraper.js";
 import { writePostMarkdown } from "./lib/markdown-writer.js";
@@ -32,6 +34,7 @@ async function main() {
   console.log(`📝 Found ${pages.length} entries to process\n`);
 
   let successCount = 0;
+  let skippedCount = 0;
   let errorCount = 0;
 
   for (const page of pages) {
@@ -52,7 +55,31 @@ async function main() {
         scrapedContent = await scrapeUrl(fields.urlSource);
       }
 
-      // Generate post with Claude
+      // System 1 Jev Pre-Flight Gate & Triage (Phases 1 & 2)
+      console.log("   ⚡ Evaluating candidate with Jev (System-1 Pre-Flight & Triage)...");
+      const jevEval = await evaluateStoryWithJev({
+        name: fields.name,
+        prompt: fields.prompt,
+        urlSource: fields.urlSource,
+        scrapedContent,
+      });
+
+      console.log(
+        `   📊 Jev Score: ${jevEval.qualityScore}/10 | Type: ${jevEval.suggestedPostType} | Audience: ${jevEval.targetAudience} | CTA: ${jevEval.recommendedCta} (${jevEval.durationMs || 0}ms)`
+      );
+
+      // Record Jev evaluation comment & category triage in Notion
+      await notion.recordJevEvaluation(page.id, jevEval);
+      console.log("   📝 Recorded Jev evaluation note & categories in Notion");
+
+      if (!jevEval.passed) {
+        console.log(`   ⛔ Post deferred by Jev gate: ${jevEval.summaryReason}`);
+        await notion.setStatus(page.id, "נדחה באיכות נמוכה");
+        skippedCount++;
+        continue;
+      }
+
+      // Generate full Hebrew post with Claude (informed by Jev triage)
       console.log("   🤖 Generating post with Claude...");
       const post = await generatePost({
         name: fields.name,
@@ -60,9 +87,14 @@ async function main() {
         urlSource: fields.urlSource,
         partialContent: fields.finalPost,
         scrapedContent,
+        jevContext: jevEval,
       });
 
-      console.log(`   ✍️  Generated: "${post.title}" (${post.wordCount} words)`);
+      // Phase 3: Dynamic Monetization CTA Injection
+      const postContentWithCta = injectDynamicCta(post.content, jevEval);
+      const wordCount = postContentWithCta.split(/\s+/).filter(Boolean).length;
+      console.log(`   💰 Attached High-Converting CTA: [${jevEval.recommendedCta}]`);
+      console.log(`   ✍️  Generated: "${post.title}" (${wordCount} words)`);
 
       // Handle image
       let ogImage = null;
@@ -82,20 +114,20 @@ async function main() {
         description: post.description,
         author: AUTHOR,
         tags: post.tags,
-        content: post.content,
+        content: postContentWithCta,
         ogImage,
         draft: true,
       });
 
       console.log(`   📄 Created: ${filename}`);
 
-      // Update Notion
-      await notion.setFinalPost(page.id, post.content);
+      // Update Notion with final post, SEO metadata, and word count
+      await notion.setFinalPost(page.id, postContentWithCta);
       await notion.setFields(page.id, {
         slug: post.slug,
         metaDescription: post.description,
         altText: post.altText,
-        wordCount: post.wordCount,
+        wordCount: wordCount,
       });
 
       // Set status based on image presence
@@ -116,7 +148,9 @@ async function main() {
   }
 
   console.log(`\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
-  console.log(`✨ Done! ${successCount} succeeded, ${errorCount} failed`);
+  console.log(
+    `✨ Done! ${successCount} succeeded, ${skippedCount} skipped by Jev, ${errorCount} failed`
+  );
   console.log(`\n📋 NEXT STEPS:`);
   console.log(`1. Run 'npm run dev' to preview locally at http://localhost:4321`);
   console.log(`2. Review generated posts (they have draft: true)`);
