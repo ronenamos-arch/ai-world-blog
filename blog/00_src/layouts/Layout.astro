@@ -4,6 +4,7 @@ import { ClientRouter } from "astro:transitions";
 import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
 import { SITE } from "@/config";
 import "@/styles/global.css";
+import Analytics from "@vercel/analytics/astro";
 
 type Props = {
   title?: string;
@@ -258,6 +259,8 @@ if (breadcrumbs && breadcrumbs.length > 0) {
     }
 
     <ClientRouter />
+
+    <Analytics />
 
     <!-- Minimal inline script to prevent FOUC - sets theme immediately -->
     <script is:inline>
